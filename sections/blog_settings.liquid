@@ -1,0 +1,35 @@
+<div class="padding-global padding-section-medium"><div class="container-large"><div class="headline-wrapper"><h2 class="heading-style-h2">
+{{ section.settings.text_headline }}
+</h2>
+</div><div class="blog_component"><div class="blog_featured-item"><div id="w-node-_599db3fb-e066-3ae2-73b0-de52e06efd6f-41b257dd" class="blog_two-articles">{% assign blog = blogs[section.settings.blog_blog] %}
+{% for article in blog.articles limit: section.settings.post_limit_blog %}
+<div class="blog_featured-item-content">
+<a href="{{ section.settings.url_artikel_3_link }}" class="blog_featured-title-link w-inline-block"> <h3 class="heading-style-h4">{{ section.settings.text_artikel_3_titel }}</h3> </a>
+<div class="text-size-regular">
+{{ section.settings.text_artikel_3_excerpt }}
+</div>
+<div class="blog_button-wrapper"><a href="{{ section.settings.url_artikel_3_link }}" class="button is-link is-icon w-inline-block"> <div>Read now</div><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3L11 8L6 13" stroke="CurrentColor" stroke-width="1.5"></path></svg></div> </a>
+</div></div>
+{% endfor %}
+</div><pre contenteditable="false" id="w-node-_599db3fb-e066-3ae2-73b0-de52e06efd7b-41b257dd" class="w-code-block" style="display:block;overflow-x:auto;background:#2b2b2b;color:#f8f8f2;padding:0.5em"><code class="language-javascript" style="white-space:pre"><span>{% assign blog = blogs[section.settings.blog] %}
+</span><div>
+<span>{% </span><span style="color:#dcc6e0">for</span><span>article </span><span style="color:#dcc6e0">in</span><span>blog.articles limit: section.settings.post_limit %}
+</span><div>
+        ARTICLE CONTENT
+      </div>
+    {% endfor %}
+</div>
+{% schema %}
+    {
+<span></span><span style="color:#abe338">"id"</span><span>: </span><span style="color:#abe338">"blog_blog"</span><span>,
+</span><span></span><span style="color:#abe338">"type"</span><span>: </span><span style="color:#abe338">"blog"</span><span>,
+</span><span></span><span style="color:#abe338">"label"</span><span>: </span><span style="color:#abe338">"Blog"</span><span></span>},
+    {
+<span></span><span style="color:#abe338">"type"</span><span>: </span><span style="color:#abe338">"range"</span><span>,
+</span><span></span><span style="color:#abe338">"id"</span><span>: </span><span style="color:#abe338">"post_limit"</span><span>,
+</span><span></span><span style="color:#abe338">"label"</span><span>: </span><span style="color:#abe338">"Posts"</span><span>,
+</span><span></span><span style="color:#abe338">"min"</span><span>: </span><span style="color:#f5ab35">3</span><span>,
+</span><span></span><span style="color:#abe338">"max"</span><span>: </span><span style="color:#f5ab35">12</span><span>,
+</span><span></span><span style="color:#abe338">"step"</span><span>: </span><span style="color:#f5ab35">3</span><span>,
+</span><span></span><span style="color:#abe338">"default"</span><span>: </span><span style="color:#f5ab35">3</span><span></span>}
+{% endschema %}</code></pre></div></div></div></div> {% schema %} {"tag":"section","name":"Blog-Settings","class":"section_blog","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"li-settings:blog"},{"id":"blog_blog","type":"blog","label":"Blog"},{"id":"post_limit_blog","type":"range","label":"Posts Blog","min":1,"max":100,"step":1,"default":3},{"id":"url_artikel_3_link","type":"url","label":"Artikel-3-Link"},{"id":"text_artikel_3_titel","type":"text","label":"Artikel-3-Titel","default":"Blog title heading will go here"},{"id":"text_artikel_3_excerpt","type":"text","label":"Artikel-3-Excerpt","default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros."}],"presets":[{"name":"Blog-Settings","category":"Liquify","blocks":[]}]} {% endschema %}

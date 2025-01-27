@@ -1,0 +1,56 @@
+{
+    "sections": {
+        "liquify_hero": {
+            "type": "liquify_hero"
+        },
+        "hero": {
+            "type": "hero"
+        },
+        "category": {
+            "type": "category"
+        },
+        "links": {
+            "type": "links"
+        },
+        "content": {
+            "type": "content"
+        },
+        "case": {
+            "type": "case"
+        },
+        "block": {
+            "type": "block"
+        },
+        "article": {
+            "type": "article"
+        },
+        "blog_settings": {
+            "type": "blog_settings"
+        },
+        "product": {
+            "type": "product"
+        },
+        "html": {
+            "type": "html"
+        },
+        "custom": {
+            "type": "custom"
+        }
+    },
+    "layout": "theme",
+    "wrapper": "main.main-wrapper",
+    "order": [
+        "liquify_hero",
+        "hero",
+        "category",
+        "links",
+        "content",
+        "case",
+        "block",
+        "article",
+        "blog_settings",
+        "product",
+        "html",
+        "custom"
+    ]
+}
