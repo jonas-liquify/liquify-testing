@@ -1,0 +1,55 @@
+<div class="padding-global padding-section-medium"><div class="container-large"><div class="headline-wrapper"><h2 class="heading-style-h2">
+{{ section.settings.text_headline }}
+</h2>
+</div><div class="blog_component"><div class="blog_featured-item"><div li-content-for-blocks="">
+{% for block in section.blocks %}
+    {% case block.type %}
+        {% when '@app' %}
+            {% render block %}
+    {% when 'option-1' %}
+            <div li-block="Option 1" class="option_item">
+                    
+                    <div>
+{{ block.settings.text_text }}
+</div>
+
+                    
+                </div>
+    {% when 'option-2' %}
+            <div li-block="Option 2" class="option_item">
+                    
+                    <div>
+{{ block.settings.text_text }}
+</div>
+
+                    
+                </div>
+    {% when 'option-3' %}
+            <div li-block="Option 3" class="option_item">
+                    
+                    <div>
+{{ block.settings.text_text }}
+</div>
+
+                    
+                </div>
+        {% endcase %}
+{% endfor %}
+
+</div>
+
+<pre contenteditable="false" id="w-node-eaea46ad-d578-31e0-21b3-db31bbb33301-41b257dd" class="w-code-block" style="display:block;overflow-x:auto;background:#2b2b2b;color:#f8f8f2;padding:0.5em"><code class="language-javascript" style="white-space:pre"><span>{% </span><span style="color:#dcc6e0">for</span><span>block </span><span style="color:#dcc6e0">in</span><span>section.blocks %}
+</span><span>{% </span><span style="color:#dcc6e0">case</span><span>block.type %}
+</span><span>{% when </span><span style="color:#abe338">'@app'</span><span>%}
+</span>{% render block %}
+<span>{% when </span><span style="color:#abe338">'option_1'</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 2</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+<span>{% when </span><span style="color:#abe338">'option_2'</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 2</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+<span>{% when </span><span style="color:#abe338">'option_3'</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 3</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+  {% endcase %}
+{% endfor %}</code></pre></div></div></div></div> {% schema %} {"tag":"section","name":"Block","class":"section_blog","blocks":[{"name":"Option 1","type":"option-1","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 1"}]},{"name":"Option 2","type":"option-2","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 2"}]},{"name":"Option 3","type":"option-3","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 3"}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"li-content-for-blocks"}],"presets":[{"name":"Block","category":"Liquify","blocks":[{"type":"option-1"},{"type":"option-2"},{"type":"option-3"}]}]} {% endschema %}

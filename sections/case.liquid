@@ -1,0 +1,32 @@
+<div class="padding-global padding-section-medium"><div class="container-large"><div class="headline-wrapper"><h2 class="heading-style-h2">
+{{ section.settings.text_headline }}
+</h2>
+<img data-attribute="test" alt="{{ section.settings.image_bild.alt }}" src="{{ section.settings.image_bild | img_url: 'master' }}" loading="lazy">
+<a data-attribute="test" href="{{ section.settings.url_test }}" class="w-button"> Button Text </a>
+</div><div class="blog_component"><div class="blog_featured-item"><div li-case="product.type">
+{% case product.type %}
+{% when 'Health' %} 
+<div li-when="'Health'" class="option_item">
+<div>Option 1</div></div>
+{% when 'Love' %} 
+<div li-when="'Love'" class="option_item">
+<div>Option 2</div></div>
+{% else %} 
+<div li-when="" class="option_item">
+<div>Option 3</div></div>
+{% endcase %}
+</div>
+
+<pre contenteditable="false" id="w-node-_4e4208f8-7c63-1f9c-883b-8de65e155ecf-41b257dd" class="w-code-block" style="display:block;overflow-x:auto;background:#2b2b2b;color:#f8f8f2;padding:0.5em"><code class="language-javascript" style="white-space:pre"><span><div>
+</span><span>{% </span><span style="color:#dcc6e0">case</span><span>product.type %}
+</span><span>{% when </span><span style="color:#abe338">'Health'</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 1</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+<span>{% when </span><span style="color:#abe338">'Love'</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 2</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+<span>{% </span><span style="color:#dcc6e0">else</span><span>%}
+</span><span><div </span><span class="hljs-class" style="color:#dcc6e0">class</span><span>=</span><span style="color:#abe338">"option_item"</span><span>>
+</span><span></span><span class="xml" style="color:#ffa07a"><</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span class="xml">Option 3</span><span class="xml" style="color:#ffa07a"></</span><span class="xml" style="color:#ffa07a">p</span><span class="xml" style="color:#ffa07a">></span><span></span></div>
+{% endcase %}
+</div></code></pre></div></div></div></div> {% schema %} {"tag":"section","name":"Case","class":"section_blog","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"li-case\/li-when"},{"id":"image_bild","type":"image_picker","label":"Bild"},{"id":"url_test","type":"url","label":"Test"}],"presets":[{"name":"Case","category":"Liquify","blocks":[]}]} {% endschema %}
