@@ -526,7 +526,7 @@ document.addEventListener('alpine:init', () => {
 
             this.product.selected_or_first_available_variant.addToCartButton = true
 
-            this.product.selected_or_first_available_variant = {...this.product.selected_or_first_available_variant, product};
+            this.product.selected_or_first_available_variant = {...this.product.selected_or_first_available_variant, ...product};
             this.product.selected_or_first_available_variant.featured_image = product?.featured_image?.src
             this.product.selected_or_first_available_variant.price = product?.price;
 
