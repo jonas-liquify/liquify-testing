@@ -21,11 +21,7 @@ document.addEventListener('alpine:init', () => {
                     this._price = value;
                 },
                 get price() {
-                    const price = new Intl.NumberFormat(Shopify.locale + '-' + Shopify.country, {
-                        style: 'currency',
-                        currency: Shopify.currency.active,
-                    });
-                    return price.format(this._price / 100 ?? 0);
+                    return this._price;
                 },
             },
 
