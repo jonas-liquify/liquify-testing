@@ -9,7 +9,7 @@
             note: null,
             attributes: {},
             items: [],
-            currency: 'EUR',
+            currency: window.Shopify.currency.active,
             cart_level_discount_applications: [],
             response: {
                 result : {},
@@ -158,7 +158,7 @@
 
         async returnCartItems() {
             await this.getCart();
-            
+
             this.$dispatch('currentcartitems', this.cart.items);
         },
 
