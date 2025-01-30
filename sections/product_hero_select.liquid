@@ -1,5 +1,5 @@
 <div class="padding-global padding-section-small"><div class="container-large"><div class="product-header_component"><script src="{{ 'liquify_custom.js' | asset_url }}" type="text/javascript"></script>
-<div li-element="product-variant-container" class="w-layout-grid product-header_layout" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" data-productid="{{ product.id }}" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)"><div id="w-node-d9b402e6-56bb-0ecd-54f4-eb3cb5fe437a-41b2584e" class="swiper-container is-product-gallery"><div class="swiper is-product-gallery"><div id="my-gallery" class="swiper-wrapper is-product-gallery">{% for image in product.images %}    <div li-for="image in product.images" class="swiper-slide is-product-gallery">
+<div li-element="product-variant-container" class="w-layout-grid product-header_layout" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)"><div id="w-node-d9b402e6-56bb-0ecd-54f4-eb3cb5fe437a-41b2584e" class="swiper-container is-product-gallery"><div class="swiper is-product-gallery"><div id="my-gallery" class="swiper-wrapper is-product-gallery">{% for image in product.images %}    <div li-for="image in product.images" class="swiper-slide is-product-gallery">
                                     
                             <div class="product-header_gallery-lightbox"><img loading="lazy" li-object:src="image.src | product_img_url: 'master'" li-object:alt="image.alt" src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" class="product-header_gallery-image">
 </div>
@@ -39,7 +39,7 @@
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
     <template x-for="(option, optionKey) in product.options" :key="optionKey">
     <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true"><div li-element="product-options-name" x-text="option">Variant</div><select type="select" li-element="product-option-select" class="form_input" x-on:change="setVariant" :name="option" :data-name="option" data-selectorType="select"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
-    <option li-element="product-option-select-loop" x-text="variantName" :value="variantName" :checked="selected_or_first_available_variant?.options.includes(variantName)"></option></template>
+    <option li-element="product-option-select-loop" x-text="variantName" :value="variantName" :selected="selected_or_first_available_variant?.options.includes(variantName)"></option></template>
 
 </select></div></template>
     </div>

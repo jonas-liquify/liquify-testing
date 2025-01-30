@@ -114,13 +114,12 @@ document.addEventListener('alpine:init', () => {
         firstOptionHasAvailableChildren: {},
         selectorType: 'radio',
         formSelector: "#product_form_" + (pProduct?.id ? pProduct.id : selectedOrFirstAvailable?.id),
-        isMainProduct: false,
+        isProductPage: window.location.pathname.includes('/products/'),
         filter: {},
 
         // Use init for debugging
         init() {
-            const productId = document.querySelector('[li-element="product-variant-container"][data-productid]')?.getAttribute('data-productid');
-            this.isMainProduct = parseInt(productId) === parseInt(pProduct?.id);
+
         },
 
         qs(selector) {
@@ -158,7 +157,7 @@ document.addEventListener('alpine:init', () => {
 
             result.existingOptions = this.getExistingOptions(result.availableVariants);
 
-            console.log("Liquify - return of variantsBasedOnFilter", result)
+            // console.log("Liquify - return of variantsBasedOnFilter", result)
 
             return result;
         },
@@ -207,15 +206,15 @@ document.addEventListener('alpine:init', () => {
         },
 
         observeVariants() {
-            if(this.isMainProduct) {
+            if(this.isProductPage) {
                 // todo: maybe via $dispatch or helper?!
-                let $this = this;
+                let $this = this
 
                 window.onpopstate = function(event) {
-
                     const urlParams = new URLSearchParams(window.location.search);
                     const variantId = urlParams.get('variant');
                     const observer = new MutationObserver(mutationCallback);
+
                     //fixme: maybe in helper?!
                     function mutationCallback(mutations) {
                         mutations.forEach(function(mutation) {
@@ -233,15 +232,14 @@ document.addEventListener('alpine:init', () => {
 
                     selectedOrFirstAvailable = $this?.product.variants.filter(variant => parseInt(variant.id) === parseInt(variantId))[0]
 
-
                     $this.product.selected_or_first_available_variant = {...$this.product.selected_or_first_available_variant, ...selectedOrFirstAvailable};
 
                     $this.product.options.forEach(function (option) {
-                        let selector = $this.formSelector + " [data-productVariantsLoop] input[name='" + option + "']"
+                        let selector = " [data-productVariantsLoop] input[name='" + option + "']"
                         if($this.selectorType === 'select') {
-                            selector = $this.formSelector + " [data-productVariantsLoop] select[name='" + option + "'] option"
+                            selector = " [data-productVariantsLoop] select[name='" + option + "'] option"
                         }
-                        document.querySelectorAll(selector).values().forEach(function(element) {
+                        document.querySelectorAll($this.formSelector + selector).values().forEach(function(element) {
                             observer.observe(element, {
                                 attributes: true
                             });
@@ -253,16 +251,22 @@ document.addEventListener('alpine:init', () => {
 
         updateVariantStatuses() {
             console.log("Liquify - updateVariantStatuses")
+
+            // Innerhalb von $nextTick(() => { activateVariants() }) bezieht sich this.$el auf den Container des Alpine-Objekts.
+            // Bei einer Variantenauswahl hingegen verweist this.$el auf das Element, das die Auswahl ausgelöst hat.
+            let form = this.$el.closest('form') ?? this.$el.querySelector('form');
             const selectedOptionOneVariants = this.product.variants.filter((variant) => {
-                    let querySelector = this.formSelector + ' [data-productVariantsLoop] input[type="radio"]:checked'
+                    let element = form.querySelector('[data-productVariantsLoop] input[type="radio"]:checked');
                     if (this.selectorType === 'select') {
-                        querySelector = this.formSelector + ' [data-productVariantsLoop] select'
+                        element = form.querySelector('[data-productVariantsLoop] select')
                     }
-                    return document.querySelector(querySelector)?.value === variant.option1
+                    return element?.value === variant.option1
                 }
             );
 
-            const inputWrappers = [...document.querySelectorAll(this.formSelector + ' [data-ProductVariantsLoop]')];
+
+
+            const inputWrappers = [...form.querySelectorAll('[data-ProductVariantsLoop]')];
 
             inputWrappers.forEach((option, index) => {
                 if (index === 0) return;
@@ -325,9 +329,23 @@ document.addEventListener('alpine:init', () => {
          * @see ProductVariationsContainer
          */
         activateVariants() {
+            if(this.$el.querySelectorAll('[li-element="product-option-select"]').length > 0) {
+                this.selectorType = 'select'
+            }
+            const checkboxes = this.$el.querySelectorAll("[li-element=product-option-input]");
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    this.parentNode.parentNode.querySelectorAll("[li-element=product-option-input]").forEach(element => {
+                        element.previousElementSibling.classList.remove('w--redirected-checked', 'w--redirected-focus')
+                    })
+
+                    if (this.checked) {
+                        this.previousElementSibling.classList.add('w--redirected-checked', 'w--redirected-focus')
+                    }
+                });
+            });
             this.observeVariants();
 
-            this.selectorType = document.querySelector('[data-selectorType]')?.dataset?.selectortype ?? this.selectorType
 
             this.product.variants.map((variant) => {
                 if (this.firstOptionHasAvailableChildren[variant?.option1] === undefined) {
@@ -336,18 +354,19 @@ document.addEventListener('alpine:init', () => {
                 this.firstOptionHasAvailableChildren[variant?.option1] += variant?.available;
             });
 
-            const option1 = this.product.options.length > 0
+            let option1 = this.product.options.length > 0
                 ? this.getVariantElement(this.product.options?.[0])
                 : false;
 
-            const option2 = this.product.options.length > 1
+            let option2 = this.product.options.length > 1
                 ? this.getVariantElement(this.product.options?.[1])
                 : false;
 
-            const option3 = this.product.options.length > 2
+            let option3 = this.product.options.length > 2
                 ? this.getVariantElement(this.product.options?.[2])
                 : false;
 
+            // console.log("activateVariants - ",  option1, option2, option3)
             if (option1) {
                 this.activateVariant(option1)
             }
@@ -389,29 +408,25 @@ document.addEventListener('alpine:init', () => {
          * Retrieves the selected element from the transferred option group
          */
         getVariantElement(optionName) {
-            let selector = this.formSelector + " [data-productVariantsLoop] input[name='" + optionName + "']:checked";
+            // Innerhalb von $nextTick(() => { activateVariants() }) bezieht sich this.$el auf den Container des Alpine-Objekts.
+            // Bei einer Variantenauswahl hingegen verweist this.$el auf das Element, das die Auswahl ausgelöst hat.
+            let form = this.$el.closest('form') ?? this.$el.querySelector('form');
 
-            if (optionName != undefined && this.selectorType === 'select') {
-                selector = this.formSelector + " [data-productVariantsLoop] select[name='" + optionName + "'] option:checked"
+            let element = form.querySelector("[data-productVariantsLoop] input[name='" + optionName + "']:checked");
 
-                // fixme: As a workaround, we check if we find the element.
-                //  If not, we use a less specific selector.
-                let element = this.qs(selector)
-                if (!element) {
-                    element = document.querySelector('form[id^="product_form_"]')
-                    console.log("Liquify - getVariantElement, fallback element: ", element)
-                }
+            //let selector = this.formSelector + " [data-productVariantsLoop] input[name='" + optionName + "']:checked";
+
+            if (optionName !== undefined && this.selectorType === 'select') {
+                element = form.querySelector("[data-productVariantsLoop] select[name='" + optionName + "'] option:checked")
 
                 if (!element) {
-                    throw new Error('Liquify - Element not found for selector: ' + selector);
+                    throw new Error('Liquify - Element not found for option: ' + optionName);
                 }
-
                 if (element['data-disabled'] ?? false) {
-                    selector = this.formSelector + " [data-productVariantsLoop] select[name='" + optionName + "'] option:not([data-disabled])"
+                    element = form.querySelector("[data-productVariantsLoop] select[name='" + optionName + "'] option:not([data-disabled])")
                 }
             }
-
-            return this.qs(selector) ? this.qs(selector) : '';
+            return element ?? '';
         },
 
         filterVariants() {
@@ -531,7 +546,7 @@ document.addEventListener('alpine:init', () => {
             this.product.selected_or_first_available_variant.price = product?.price;
 
             // nur für die Detailseiten
-            if (pushState && this.isMainProduct) {
+            if (pushState && this.isProductPage) {
                 this.setUrlParam()
             }
         },
@@ -616,10 +631,12 @@ document.addEventListener('alpine:init', () => {
                 return
             }
 
-
-            const payload = pProduct?.id ? LiquifyHelper.serializeFormToObject(this.formSelector) : {};
+            // Innerhalb von $nextTick(() => { activateVariants() }) bezieht sich this.$el auf den Container des Alpine-Objekts.
+            // Bei einer Variantenauswahl hingegen verweist this.$el auf das Element, das die Auswahl ausgelöst hat.
+            let form = this.$el.closest('form') ?? this.$el.querySelector('form');
+            const payload = pProduct?.id ? LiquifyHelper.serializeFormToObject(form) : {};
             payload['items'] = [{
-                id: productId ?? this.selectedProductId ?? this.selected_or_first_available_variant?.id,
+                id: productId ?? this.product.selected_or_first_available_variant?.id,
                 quantity: quantity ?? this.quantity ?? 1,
             }];
 
