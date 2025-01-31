@@ -9,12 +9,6 @@
  */
 {
   "sections": {
-    "product_hero_select_VxY3DJ": {
-      "type": "product_hero_select",
-      "settings": {
-        "text_headline": "Description"
-      }
-    },
     "product_recommended": {
       "type": "product_recommended",
       "settings": {
@@ -31,8 +25,7 @@
   "layout": "product",
   "wrapper": "main.main-wrapper",
   "order": [
-    "product_hero_select_VxY3DJ",
-    "product_recommended",
-    "product_hero_form_qdyAgJ"
+    "product_hero_form_qdyAgJ",
+    "product_recommended"
   ]
 }
