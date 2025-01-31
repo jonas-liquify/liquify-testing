@@ -101,8 +101,15 @@ const LiquifyHelper = {
         const obj = {};
         try {
             const formData = new FormData(form);
-            for (let [key, value] of formData) {
-                obj[key] = value;
+            const properties = {};
+            for (const [key, value] of formData) {
+                if(key.indexOf('properties') !== -1) {
+                    const name = key.replace('properties[', '').replace(']', '');
+                    properties[name] = value;
+                    obj["properties"] = properties;
+                } else {
+                    obj[key] = value;
+                }
             }
         } catch(e) {
             console.info("form not found", form)
