@@ -1,4 +1,4 @@
-<div class="header_background-image-wrapper"><div class="header_overlay-layer"></div>{% if block.settings.image_bild %}
+<div class="header_background-image-wrapper"><div class="header_overlay-layer"></div>{% if block.settings.image_bild != blank %}
 <img src="{{ section.settings.image_bild | img_url: 'master' }}" loading="eager" alt="{{ section.settings.image_bild.alt }}" class="header_background-image">
 {% else %}
  {{  'detailed-apparel-1' | placeholder_svg_tag: 'header_background-image'  }} 
