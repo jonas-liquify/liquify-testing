@@ -1,4 +1,8 @@
-<div class="padding-global padding-section-small"><div x-data="{ open: false }" x-init="$nextTick(() => { $dispatch('getcartitems') })" @currentcartitems.window="open = event.detail.filter(item => item.id == '{{ product.selected_or_first_available_variant.id }}').length > 0">
+<div class="padding-global padding-section-small"><div x-data="{ open: false checkCart(event) { 
+            this.open = event.detail.some(item => item.id == '40430049460327'); 
+        } 
+    } " x-init="$dispatch('getcartitems')"
+    @currentcartitems.window="checkCart">
 
 <div x-show="open">
 im cart
