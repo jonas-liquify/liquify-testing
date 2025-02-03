@@ -83,14 +83,13 @@
 </div>{% endform %}
 
 
-  <script>
 document.addEventListener("alpine:init", () => {
     Alpine.data("productComponent", () => ({
-        calculatedPrice: product.selected_or_first_available_variant.price, // Default price
+        calculatedPrice: 0, // This will be updated dynamically
 
         init() {
-            this.updatePrice();
-            this.observeSellingPlan();
+            this.updatePrice(); // Initial price calculation
+            this.observeSellingPlan(); // Watch for changes in the selling plan input
         },
 
         observeSellingPlan() {
@@ -109,6 +108,7 @@ document.addEventListener("alpine:init", () => {
 
             const selectedPlanId = parseInt(input.value, 10);
             let discount = 0;
+            let variantPrice = product.selected_or_first_available_variant.price; // Get active variant price
 
             // Find the selected selling plan
             product.selling_plan_groups.forEach(group => {
@@ -122,12 +122,11 @@ document.addEventListener("alpine:init", () => {
                 });
             });
 
-            // Calculate new price
-            this.calculatedPrice = Math.round(this.product.price * (1 - discount / 100));
+            // Apply discount
+            this.calculatedPrice = Math.round(variantPrice * (1 - discount / 100));
         }
     }));
 });
-</script>
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
