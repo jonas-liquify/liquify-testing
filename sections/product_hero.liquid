@@ -83,6 +83,7 @@
 </div>{% endform %}
 
 
+  <script>
 document.addEventListener("alpine:init", () => {
     Alpine.data("productComponent", () => ({
         calculatedPrice: 0, // This will be updated dynamically
@@ -127,6 +128,7 @@ document.addEventListener("alpine:init", () => {
         }
     }));
 });
+</script>
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
