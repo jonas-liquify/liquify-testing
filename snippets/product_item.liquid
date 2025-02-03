@@ -16,7 +16,7 @@
 <div class="spacer-xsmall is-grow"></div>    </div>
 {% endif %}{% endform %}
 <div class="margin-top-auto"><div class="product-item_form-wrapper">{% if product.available == true %}    <div li-if="product.available == true">
-    <a li-element="add-to-cart" href="#" class="button max-width-full w-button" @click="addToCart(event, true)" :disabled="!addToCartButton">Add to Cart</a>    </div>
+    <a li-element="add-to-cart" href="#" class="button max-width-full w-button" @click="addToCart($event, true)" :disabled="!addToCartButton">Add to Cart</a>    </div>
 {% endif %}{% if product.available != true %}    <div li-if="product.available != true">
     <a href="#" class="button is-secondary pointer-events-off max-width-full w-button">Not in Stock</a>    </div>
 {% endif %}</div></div></div>

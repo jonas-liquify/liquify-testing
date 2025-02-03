@@ -509,7 +509,7 @@ document.addEventListener('alpine:init', () => {
          * Add a single product to cart.
          */
         async addToCart(e, toggleMiniCart = true, productId = undefined, quantity = undefined) {
-            if(!(e instanceof Event)){
+            if(!(e instanceof Event) || !Object.hasOwn(e, 'preventDefault')){
                 e = window.event
             }
             e.preventDefault();
@@ -560,8 +560,8 @@ document.addEventListener('alpine:init', () => {
         /**
          * Add a single product to cart and redirect to checkout.
          */
-        async addToCartAndCheckout(event, toggleMiniCart = true, productId = undefined, quantity = undefined) {
-            await this.addToCart(event, toggleMiniCart, productId, quantity)
+        async addToCartAndCheckout(e, toggleMiniCart = true, productId = undefined, quantity = undefined) {
+            await this.addToCart(e, toggleMiniCart, productId, quantity)
                 .then(() => {
                     window.location.href = '/checkout';
                 });
