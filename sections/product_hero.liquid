@@ -86,7 +86,8 @@
   <script>
 document.addEventListener("alpine:init", () => {
     Alpine.data("productComponent", () => ({
-        calculatedPrice: 0, // This will be updated dynamically
+        calculatedPrice: 0, // Will be updated dynamically
+        selectedPlanId: null, // Stores selected selling plan ID
 
         init() {
             this.updatePrice(); // Initial price calculation
@@ -96,7 +97,9 @@ document.addEventListener("alpine:init", () => {
         observeSellingPlan() {
             const input = document.querySelector(".selected-selling-plan-id");
             if (input) {
+                this.selectedPlanId = parseInt(input.value, 10); // Store selected plan ID
                 const observer = new MutationObserver(() => {
+                    this.selectedPlanId = parseInt(input.value, 10);
                     this.updatePrice();
                 });
                 observer.observe(input, { attributes: true, attributeFilter: ["value"] });
@@ -104,18 +107,27 @@ document.addEventListener("alpine:init", () => {
         },
 
         updatePrice() {
-            const input = document.querySelector(".selected-selling-plan-id");
-            if (!input) return;
+            // Fetch the Alpine product object from `handleVariant`
+            const alpineComponent = document.querySelector("[x-data]").__x;
+            if (!alpineComponent) {
+                console.error("Alpine.js product object not found");
+                return;
+            }
 
-            const selectedPlanId = parseInt(input.value, 10);
+            const product = alpineComponent.$data.product; // Get the product data
+            if (!product) {
+                console.error("Product data not found in Alpine.js");
+                return;
+            }
+
+            let variantPrice = product.selected_or_first_available_variant.price; // Get the current variant price
             let discount = 0;
-            let variantPrice = product.selected_or_first_available_variant.price; // Get active variant price
 
-            // Find the selected selling plan
-            product.selling_plan_groups.forEach(group => {
-                group.selling_plans.forEach(plan => {
-                    if (plan.id === selectedPlanId) {
-                        const adjustment = plan.price_adjustments[0]; // Assume first adjustment is used
+            // Find the matching selling plan and apply its price adjustment
+            product.selling_plan_groups?.forEach(group => {
+                group.selling_plans?.forEach(plan => {
+                    if (plan.id === this.selectedPlanId) {
+                        const adjustment = plan.price_adjustments[0]; // Assume first adjustment
                         if (adjustment.value_type === "percentage") {
                             discount = adjustment.value;
                         }
@@ -123,7 +135,7 @@ document.addEventListener("alpine:init", () => {
                 });
             });
 
-            // Apply discount
+            // Calculate new price
             this.calculatedPrice = Math.round(variantPrice * (1 - discount / 100));
         }
     }));
