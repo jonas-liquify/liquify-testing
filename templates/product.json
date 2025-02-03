@@ -11,6 +11,17 @@
   "sections": {
     "product_hero": {
       "type": "product_hero",
+      "blocks": {
+        "text_2_g4EUyY": {
+          "type": "text-2",
+          "settings": {
+            "text_text": "<div class=\"subscriptions_app_embed_block\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "text_2_g4EUyY"
+      ],
       "settings": {
         "text_headline": "Description"
       }
