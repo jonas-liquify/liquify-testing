@@ -36,6 +36,25 @@
         not available        </span>
     </template>
 </div></div></div><div class="product-header_form-block w-form">{% form 'product', product, class: 'product-header_default-state' %}
+<div li-content-for-blocks="">
+{% for block in section.blocks %}
+    {% case block.type %}
+        {% when '@app' %}
+            {% render block %}
+    {% when 'text' %}
+            <div li-block="Text">
+                    
+                    <div>
+{{ block.settings.text_text }}
+</div>
+
+                    
+                </div>
+        {% endcase %}
+{% endfor %}
+
+</div>
+
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
     <template x-for="(option, optionKey) in product.options" :key="optionKey">
     <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true"><div li-element="product-options-name" x-text="option">Variant</div><div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
@@ -56,4 +75,4 @@
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
-<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[]}]} {% endschema %}
+<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","blocks":[{"name":"Text","type":"text","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[{"type":"text"}]}]} {% endschema %}
