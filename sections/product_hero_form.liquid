@@ -43,7 +43,7 @@
 <input class="form_input w-input" maxlength="256" name="properties[Birthday]" data-name="Field 2" placeholder="Example Text" type="text" id="field-2">
 <input type="hidden" name="selling_plan" value="{{ selling_plan.id }}">
 <div class="product-header_add-to-cart-wrapper"><div class="product-header_buy-wrappper"><input name="quantity" type="number" class="form_input is-quantity" value="1">
-<input type="submit" data-wait="Please wait..." li-element="add-to-cart" class="button max-width-full w-button" value="Add to cart" @click="addToCart(event, true)" :disabled="!addToCartButton">
+<input type="submit" data-wait="Please wait..." li-element="add-to-cart" class="button max-width-full w-button" value="Add to cart" @click="addToCart($event, true)" :disabled="!addToCartButton">
 </div><div class="product-header_out-of-stock"><a href="#" class="button is-secondary max-width-full pointer-events-off w-button">Not in Stock</a></div></div>{% endform %}
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
