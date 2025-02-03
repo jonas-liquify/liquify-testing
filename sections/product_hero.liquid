@@ -86,7 +86,7 @@
   <script>
 document.addEventListener("alpine:init", () => {
     Alpine.data("productComponent", () => ({
-        calculatedPrice: 0, // Will be updated dynamically
+        calculatedPrice: 0, // Updated dynamically
         selectedPlanId: null, // Stores selected selling plan ID
 
         init() {
@@ -107,24 +107,24 @@ document.addEventListener("alpine:init", () => {
         },
 
         updatePrice() {
-            // Fetch the Alpine product object from `handleVariant`
-            const alpineComponent = document.querySelector("[x-data]").__x;
-            if (!alpineComponent) {
-                console.error("Alpine.js product object not found");
+            // Find the element that contains the Alpine.js instance of `handleVariant`
+            const alpineContainer = document.querySelector("[x-data^='handleVariant']");
+            if (!alpineContainer || !alpineContainer.__x) {
+                console.error("Alpine.js handleVariant component not found");
                 return;
             }
 
-            const product = alpineComponent.$data.product; // Get the product data
-            if (!product) {
+            const productData = alpineContainer.__x.$data.product; // Get the product object
+            if (!productData) {
                 console.error("Product data not found in Alpine.js");
                 return;
             }
 
-            let variantPrice = product.selected_or_first_available_variant.price; // Get the current variant price
+            let variantPrice = productData.selected_or_first_available_variant.price; // Get current variant price
             let discount = 0;
 
             // Find the matching selling plan and apply its price adjustment
-            product.selling_plan_groups?.forEach(group => {
+            productData.selling_plan_groups?.forEach(group => {
                 group.selling_plans?.forEach(plan => {
                     if (plan.id === this.selectedPlanId) {
                         const adjustment = plan.price_adjustments[0]; // Assume first adjustment
