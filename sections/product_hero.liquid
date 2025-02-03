@@ -111,7 +111,7 @@ document.addEventListener("alpine:init", () => {
             let discount = 0;
 
             // Find the selected selling plan
-            this.product.selling_plan_groups.forEach(group => {
+            product.selling_plan_groups.forEach(group => {
                 group.selling_plans.forEach(plan => {
                     if (plan.id === selectedPlanId) {
                         const adjustment = plan.price_adjustments[0]; // Assume first adjustment is used
