@@ -1,0 +1,23 @@
+<div class="container-small-main"><div class="logo-wrapper"><div class="w-layout-vflex flex-block-small-section"><p class="subtext-filter">
+{{ section.settings.text_transition_title }}
+</p>
+<p class="subtext-sub-fill">
+{{ section.settings.text_transition_sub_title }}
+</p>
+</div><div fb-carousel-overflow-size="0" fb-carousel="true" fb-carousel-direction="left" fb-carousel-speed="30000" fb-carousel-delay="0" fb-carousel-pauseable="false" fb-carousel-overflow="false" class="logo-carousel-horizontal"><div class="logo-gradient-left"></div><div class="logo-gradient-right"></div><div fb-carousel-content="true" class="logo-carousel-content">{% for block in section.blocks %}
+    {% if block.type == "carousel-content" %}
+                    <div li-block="Carousel Content" class="tab-link-horizontal">
+                                    
+                                    <div class="tab-icon-green"><img loading="lazy" src="{{ 'fire-icon-white.svg' | asset_url }}" alt="" class="regular-icon-feature green">
+</div>
+                                    
+                                    <div class="tab-link-text-wrapper"><div class="column-x-small-main"><h6 class="product-h6-heading">
+{{ block.settings.text_carousel_text }}
+</h6>
+</div></div>
+                                    
+                            </div>
+            {% endif %}
+{% endfor %}
+</div></div></div><div class="code-embed w-embed w-script"><!--  Flowbase Booster [Carousel Ticker]  -->
+<script src="https://cdn.jsdelivr.net/npm/@flowbase-co/boosters-carousel-ticker@1/dist/carousel-ticker.min.js" type="text/javascript"></script></div></div> {% schema %} {"tag":"section","name":"Transition Block","class":"section_transition background-color-grey","blocks":[{"name":"Carousel Content","type":"carousel-content","settings":[{"id":"text_carousel_text","type":"text","label":"Carousel Text","default":"RECOVER FROM YOUR WORKOUTS"}]}],"settings":[{"id":"text_transition_title","type":"text","label":"Transition Title","default":"Why You'll Love Forward Protein Gummies<br\/>"},{"id":"text_transition_sub_title","type":"text","label":"Transition Sub-title","default":"Protein-packed benefits in every bite!<br\/>"}],"presets":[{"name":"Transition Block","category":"Liquify","blocks":[{"type":"carousel-content"}]}]} {% endschema %}
