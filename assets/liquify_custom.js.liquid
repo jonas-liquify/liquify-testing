@@ -633,6 +633,12 @@ document.addEventListener('alpine:init', () => {
         /**
          * @deprecated
          */
+        set quantity(quantity) {
+            this.product.selected_or_first_available_variant.quantity = quantity
+        },
+        /**
+         * @deprecated
+         */
         get addToCartButton() {
             //console.warn('deprecated "get addToCartButton" in handleVariant')
             return this.product.selected_or_first_available_variant.addToCartButton

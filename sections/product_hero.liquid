@@ -9,9 +9,9 @@
                                     <img loading="lazy" li-object:src="image.src | product_img_url: 'master'" li-object:alt="image.alt" src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" class="product_thumbnail-image">
 
                         </div>
-{% endfor %}</div></div></div><div class="swiper-slide is-product-thumbnail is-active hide"></div></div><div x-data="productComponent()" id="w-node-_7048b639-be81-c25f-3e39-a62262971160-41b2584e" class="product-header_product-details"><div li-object="product.vendor" class="text-size-regular">{{ product.vendor }}</div><h1 li-object:text="product.title" class="heading-style-h2">
+{% endfor %}</div></div></div><div class="swiper-slide is-product-thumbnail is-active hide"></div></div><div id="w-node-_7048b639-be81-c25f-3e39-a62262971160-41b2584e" class="product-header_product-details"><div li-object="product.vendor" class="text-size-regular">{{ product.vendor }}</div><h1 li-object:text="product.title" class="heading-style-h2">
 {{ product.title }}
-</h1><div class="product-header_price-wrapper"><div li-js-price="price" class="text-size-large text-weight-bold" x-text="calculatedPrice">$55</div><template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
+</h1><div class="product-header_price-wrapper"><div li-js-price="price" class="text-size-large text-weight-bold" x-text="LiquifyHelper.moneyFormat(price, true, '{{ shop.money_with_currency_format }}')">$55</div><template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
             <div li-js-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
         <div li-object="product.compare_at_price | money" class="text-size-regular text-style-strikethrough text-align-right text-style-muted">{{ product.compare_at_price | money }}</div>        </div>
     </template>
@@ -81,67 +81,7 @@
         <a href="#" class="button is-secondary max-width-full pointer-events-off w-button">Not in Stock</a>        </div>
     </template>
 </div>{% endform %}
-
-
-  <script>
-document.addEventListener("alpine:init", () => {
-    Alpine.data("productComponent", () => ({
-        calculatedPrice: 0, // Updated dynamically
-        selectedPlanId: null, // Stores selected selling plan ID
-
-        init() {
-            this.updatePrice(); // Initial price calculation
-            this.observeSellingPlan(); // Watch for changes in the selling plan input
-        },
-
-        observeSellingPlan() {
-            const input = document.querySelector(".selected-selling-plan-id");
-            if (input) {
-                this.selectedPlanId = parseInt(input.value, 10); // Store selected plan ID
-                const observer = new MutationObserver(() => {
-                    this.selectedPlanId = parseInt(input.value, 10);
-                    this.updatePrice();
-                });
-                observer.observe(input, { attributes: true, attributeFilter: ["value"] });
-            }
-        },
-
-        updatePrice() {
-            // Find the element that contains the Alpine.js instance of `handleVariant`
-            const alpineContainer = document.querySelector("[x-data^='handleVariant']");
-            if (!alpineContainer || !alpineContainer.__x) {
-                console.error("Alpine.js handleVariant component not found");
-                return;
-            }
-
-            const productData = alpineContainer.__x.$data.product; // Get the product object
-            if (!productData) {
-                console.error("Product data not found in Alpine.js");
-                return;
-            }
-
-            let variantPrice = productData.selected_or_first_available_variant.price; // Get current variant price
-            let discount = 0;
-
-            // Find the matching selling plan and apply its price adjustment
-            productData.selling_plan_groups?.forEach(group => {
-                group.selling_plans?.forEach(plan => {
-                    if (plan.id === this.selectedPlanId) {
-                        const adjustment = plan.price_adjustments[0]; // Assume first adjustment
-                        if (adjustment.value_type === "percentage") {
-                            discount = adjustment.value;
-                        }
-                    }
-                });
-            });
-
-            // Calculate new price
-            this.calculatedPrice = Math.round(variantPrice * (1 - discount / 100));
-        }
-    }));
-});
-</script>
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
-<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","blocks":[{"name":"Text","type":"text","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]},{"name":"Text-2","type":"text-2","settings":[{"id":"text_text","type":"html","label":"Text","default":"This is some text inside of a div block."}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[{"type":"text"},{"type":"text-2"}]}]} {% endschema %}
+<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","blocks":[{"name":"Text","type":"text","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]},{"name":"Text-2","type":"text-2","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[{"type":"text"},{"type":"text-2"}]}]} {% endschema %}
