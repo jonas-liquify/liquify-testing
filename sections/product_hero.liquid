@@ -53,113 +53,34 @@
     {% when 'text-2' %}
             <div li-block="Text-2">
                     
-                    <div>
-{{ block.settings.text_text }}
-</div>
+                    <div>{{ section.settings.html_text }} </div>
+
+                    
+                </div>
+    {% when 'subscription' %}
+            <div x-data="{selling_plan: '{{ product.selected_or_first_available_variant. selected_selling_plan_allocation.selling_plan.id }}', sellingplan_active: false }" li-block="Subscription">
+                    
+                    {% for variant in product.variants %}    <div li-for="variant in product.variants">
+                                    <label class="w-radio"><input class="w-form-formradioinput w-radio-input" x-bind:value="" name="selling_plan_active" data-name="selling_plan_active" x-model="selling_plan" type="radio" id="radio-5" value="">
+<span class="w-form-label" for="radio-5">Ohne Subscription</span></label>
+                            
+                            <div><label class="w-radio"><input type="radio" name="selling_plan_active" id="radio-4" data-name="selling_plan_active" x-model="sellingplan_active" class="w-form-formradioinput w-radio-input" value="Radio 4">
+<span class="w-form-label" for="radio-4">Mit Subscription</span></label>{% for plan in variant.selling_plan_allocations %}    <label li-for="plan in variant.selling_plan_allocations" class="w-radio">
+                                    <input class="w-form-formradioinput w-radio-input" x-bind:value="plan.selling_plan.id" name="selling_plan" data-name="selling_plan" x-model="selling_plan" type="radio" id="radio-4" value="Radio 4">
+
+                            <span li-object="plan.selling_plan.name" class="w-form-label" for="radio-4">{{ plan.selling_plan.name }}</span>
+                        </label>
+{% endfor %}</div>
+                            
+                        </div>
+{% endfor %}
+                    <input name="selling_plan" type="hidden" x-model="selling_plan">
 
                     
                 </div>
         {% endcase %}
 {% endfor %}
-{%- assign current_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
 
-{% if product.selling_plan_groups.size > 0 %}
-  <div class="selling_plan_app_container" data-section-id='{{ section.id }}'>
-    <script src="{{ 'selling-plans-integration.js' | asset_url }}" defer></script>
-    <style>.selling_plan_theme_integration--hidden {display: none;}</style>
-    {% for variant in product.variants %}
-      {%liquid
-        assign variantPrice = variant.price | money_with_currency | escape
-        assign variantComparedAtPrice = variant.compare_at_price | money_with_currency | escape
-      %}
-      {% if variant.selling_plan_allocations.size > 0 %}
-        <section data-variant-id='{{ variant.id }}' class='selling_plan_theme_integration {% if variant.id != current_variant.id %}selling_plan_theme_integration--hidden{% endif %}'>
-          <fieldset>
-            <legend>
-              {{ block.settings.supporting_text_title }}
-            </legend>
-            <div>
-              {% unless product.requires_selling_plan %}
-                <div>
-                  <label>
-                    <input
-                      aria-label='One-time purchase. Product price {{ variantPrice }}'
-                      type='radio'
-                      name="purchaseOption_{{ section.id }}_{{ variant.id }}"
-                      {% if variant.available == false %}disabled{% endif %}
-                      id='{{ section.id }}_one_time_purchase'
-                      data-radio-type='one_time_purchase'
-                      data-variant-id='{{ variant.id }}'
-                      data-variant-price='{{ variantPrice }}'
-                      data-variant-compare-at-price='{{ variantComparedAtPrice }}'
-                      checked
-                    />
-                    One-time purchase
-                  </label>
-                </div>
-              {% endunless %}
-              {% assign group_ids = variant.selling_plan_allocations | map: 'selling_plan_group_id' | uniq %}
-              {% for group_id in group_ids %}
-                {%liquid
-                   assign group = product | map: 'selling_plan_groups' | where: 'id', group_id | first
-                   assign allocations = variant | map: 'selling_plan_allocations' | where: 'selling_plan_group_id', group_id
-
-                   if forloop.first
-                    assign first_selling_plan_group = true
-                  else
-                    assign first_selling_plan_group = false
-                  endif
-                %}
-                <div>
-                  <div>
-                    <label>{{ group.name }}</label>
-                  </div>
-                  <ul>
-                    {% for allocation in allocations %}
-
-                      {%liquid
-                        if forloop.first and product.requires_selling_plan and first_selling_plan_group
-                          assign plan_checked = 'checked'
-                        else
-                          assign plan_checked = nil
-                        endif
-
-                        assign allocationPrice = allocation.price | money_with_currency | escape
-                        assign allocationComparedAtPrice = allocation.compare_at_price | money_with_currency | escape
-                      %}
-
-                      <li>
-                        <label>
-                          <input
-                            type='radio'
-                            {% if variant.available == false %}disabled{% endif %}
-                            aria-label='{{ allocation.selling_plan.name }}. Product price {{ allocationPrice }}'
-                            name="purchaseOption_{{ section.id }}_{{ variant.id }}"
-                            data-radio-type='selling_plan'
-                            data-selling-plan-id='{{ allocation.selling_plan.id }}'
-                            data-selling-plan-group-id='{{ section.id }}_{{ group_id }}_{{ variant.id }}'
-                            data-selling-plan-adjustment='{{ allocation.selling_plan.price_adjustments.size }}'
-                            data-variant-price='{{ allocationPrice }}'
-                            data-variant-compare-at-price='{{ allocationComparedAtPrice }}'
-                            {{ plan_checked }}>
-                          {{ allocation.selling_plan.name }}
-                        </label>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% endfor %}
-            </div>
-          </fieldset>
-        </section>
-      {% endif %}
-    {% endfor %}
-  </div>
-  <input
-    name='selling_plan'
-    class='selected-selling-plan-id'
-    type='hidden'>
-{% endif %}
 </div>
 
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
@@ -182,4 +103,4 @@
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
-<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","blocks":[{"name":"Text","type":"text","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]},{"name":"Text-2","type":"text-2","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[{"type":"text"},{"type":"text-2"}]}]} {% endschema %}
+<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","blocks":[{"name":"Text","type":"text","settings":[{"id":"text_text","type":"text","label":"Text","default":"This is some text inside of a div block."}]},{"name":"Text-2","type":"text-2","settings":[{"id":"html_text","type":"html","label":"Text","default":"This is some text inside of a div block."}]},{"name":"Subscription","type":"subscription","settings":null}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[{"type":"text"},{"type":"text-2"},{"type":"subscription"}]}]} {% endschema %}
