@@ -60,7 +60,7 @@
     {% when 'subscription' %}
             <div x-data="{selling_plan: '{{ product.selected_or_first_available_variant. selected_selling_plan_allocation.selling_plan.id }}', sellingplan_active: false }" li-block="Subscription">
                     
-                    {% for variant in product.variants %}    <template x-if="'{{ variant.id }}' === product.selected_or_first_available_variant.id" ><div li-for="variant in product.variants" >
+                    {% for variant in product.variants %}    <template x-if="{{ variant.id }} === product.selected_or_first_available_variant.id" ><div li-for="variant in product.variants" >
                                     <label class="w-radio"><input class="w-form-formradioinput w-radio-input" x-bind:value="" name="selling_plan_active" data-name="selling_plan_active" x-model="selling_plan" type="radio" id="radio-5" value="">
 <span class="w-form-label" for="radio-5">Ohne Subscription</span></label>
                             
