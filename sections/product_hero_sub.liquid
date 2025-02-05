@@ -36,11 +36,9 @@
         not available        </span>
     </template>
 </div></div></div><div class="product-header_form-block w-form">{% form 'product', product, class: 'product-header_default-state' %}
-<div li-for:inside="variant in product.variants">
+{% if product.selling_plan_groups.size > 0 %}<div li-for:inside="variant in product.variants">
         {% for variant in product.variants %}                            
-                            <template x-if="{{ variant.id }} === product.selected_or_first_available_variant.id">
-            <div li-js-if="{{ variant.id }} === product.selected_or_first_available_variant.id" class="product-header_subscription">
-        <label class="product-header_subscription_radio-lable w-radio"><input type="radio" name="selling_plan_active" id="radio-5" data-name="selling_plan_active" x-on:click="sellingplan_active = false; selling_plan = ''" class="w-form-formradioinput w-radio-input" value="">
+                            <template x-if="{{ variant.id }} === product.selected_or_first_available_variant.id"><div class="product-header_subscription"><label class="product-header_subscription_radio-lable w-radio"><input type="radio" name="selling_plan_active" id="radio-5" data-name="selling_plan_active" x-on:click="sellingplan_active = false; selling_plan = ''" class="w-form-formradioinput w-radio-input" value="">
 <span class="w-form-label" for="radio-5">
 {{ section.settings.text_without_subscription }}
 </span>
@@ -48,20 +46,16 @@
 <span class="w-form-label" for="radio-4">
 {{ section.settings.text_with_subscription }}
 </span>
-</label><div x-show="sellingplan_active" class="w-layout-vflex product-header_subscription_radio-lable is-on">{% for plan in variant.selling_plan_allocations %}    <label li-for="plan in variant.selling_plan_allocations" class="product-header_subscription_radio-lable-small w-radio">
+</label><div x-show="sellingplan_active" class="w-layout-vflex product-header_subscription_radio-lable is-on">{% for plan in variant.selling_plan_allocations %}    <label li-for="plan in variant.selling_plan_allocations" class="w-radio">
                                     <input class="w-form-formradioinput w-radio-input" li-object:value="plan.selling_plan.id" name="selling_plan" data-name="selling_plan" x-model="selling_plan" type="radio" id="radio-4" value="{{ plan.selling_plan.id }}">
 
                             <span li-object="plan.selling_plan.name" class="w-form-label" for="radio-4">{{ plan.selling_plan.name }}</span>
                         </label>
-{% endfor %}</div></div>        </div>
-    </template>
-
-                            <template x-if="sellingplan_active">
-            <input name="selling_plan" type="hidden" x-model="selling_plan" li-js-if="sellingplan_active">
-    </template>
+{% endfor %}</div></div></div></template>
+                            <input name="selling_plan" type="hidden" x-model="selling_plan">
 
                             
-                    {% endfor %}    </div>
+                    {% endfor %}    </div>{% endif %}
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
     <template x-for="(option, optionKey) in product.options" :key="optionKey">
     <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true"><div li-element="product-options-name" x-text="option">Variant</div><div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
