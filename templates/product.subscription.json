@@ -9,23 +9,25 @@
  */
 {
   "sections": {
+    "product_hero_sub_enY89a": {
+      "type": "product_hero_sub",
+      "settings": {
+        "text_without_subscription": "without Subscription",
+        "text_with_subscription": "with Subscription",
+        "text_headline": "Description"
+      }
+    },
     "product_recommended": {
       "type": "product_recommended",
       "settings": {
         "text_headline": "Recommended"
-      }
-    },
-    "product_hero_form_qdyAgJ": {
-      "type": "product_hero_form",
-      "settings": {
-        "text_headline": "Description"
       }
     }
   },
   "layout": "product",
   "wrapper": "main.main-wrapper",
   "order": [
-    "product_hero_form_qdyAgJ",
+    "product_hero_sub_enY89a",
     "product_recommended"
   ]
 }
