@@ -212,7 +212,7 @@
                                   <span class="w-form-label" for="radio-4">Mit Subscription</span></label
                                 >
                                 {%- for plan in variant.selling_plan_allocations %}
-                                  <label x-show="sellingplan_active" li-for="plan in variant.selling_plan_allocations" class="w-radio">
+                                  <label x-show="sellingplan_active" li-for="plan in variant.selling_plan_allocations" x-transition class="w-radio">
                                     <input
                                       class="w-form-formradioinput w-radio-input"
                                       
