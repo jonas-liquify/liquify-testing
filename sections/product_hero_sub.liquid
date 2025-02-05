@@ -1,5 +1,5 @@
 <div class="padding-global padding-section-small"><div class="container-large"><div class="product-header_component"><script src="{{ 'liquify_custom.js' | asset_url }}" type="text/javascript"></script>
-<div li-element="product-variant-container" class="w-layout-grid product-header_layout" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)"><div id="w-node-dde72f15-2dd1-3c3f-ef72-b299bc1979d2-41b2584e" class="swiper-container is-product-gallery"><div class="swiper is-product-gallery"><div id="my-gallery" class="swiper-wrapper is-product-gallery">{% for image in product.images %}    <div li-for="image in product.images" class="swiper-slide is-product-gallery">
+<div li-element="product-variant-container" class="w-layout-grid product-header_layout" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)"><div id="w-node-_82c002b0-f51e-e7be-31ce-044c0709a78f-41b2584e" class="swiper-container is-product-gallery"><div class="swiper is-product-gallery"><div id="my-gallery" class="swiper-wrapper is-product-gallery">{% for image in product.images %}    <div li-for="image in product.images" class="swiper-slide is-product-gallery">
                                     
                             <div class="product-header_gallery-lightbox"><img loading="lazy" li-object:src="image.src | product_img_url: 'master'" li-object:alt="image.alt" src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" class="product-header_gallery-image">
 </div>
@@ -9,9 +9,9 @@
                                     <img loading="lazy" li-object:src="image.src | product_img_url: 'master'" li-object:alt="image.alt" src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" class="product_thumbnail-image">
 
                         </div>
-{% endfor %}</div></div></div><div class="swiper-slide is-product-thumbnail is-active hide"></div></div><div id="w-node-_7048b639-be81-c25f-3e39-a62262971160-41b2584e" class="product-header_product-details"><div li-object="product.vendor" class="text-size-regular">{{ product.vendor }}</div><h1 li-object:text="product.title" class="heading-style-h2">
+{% endfor %}</div></div></div><div class="swiper-slide is-product-thumbnail is-active hide"></div></div><div x-data="{selling_plan: '{{ product.selected_or_first_available_variant. selected_selling_plan_allocation.selling_plan.id }}', sellingplan_active: false }" id="w-node-_82c002b0-f51e-e7be-31ce-044c0709a7a0-41b2584e" class="product-header_product-details"><div li-object="product.vendor" class="text-size-regular">{{ product.vendor }}</div><h1 li-object:text="product.title" class="heading-style-h2">
 {{ product.title }}
-</h1><div class="product-header_price-wrapper"><div li-js-price="price" class="text-size-large text-weight-bold" x-text="LiquifyHelper.moneyFormat(price, true, '{{ shop.money_with_currency_format }}')">$55</div><template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
+</h1><div class="product-header_price-wrapper"><div li-js-price="product.selected_or_first_available_variant.selling_plan_allocations.find(allocation => allocation.selling_plan_id == selling_plan)?.price ?? price" class="text-size-large text-weight-bold" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.selling_plan_allocations.find(allocation => allocation.selling_plan_id == selling_plan)?.price ?? price, true, '{{ shop.money_with_currency_format }}')">$55</div><template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
             <div li-js-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
         <div li-object="product.compare_at_price | money" class="text-size-regular text-style-strikethrough text-align-right text-style-muted">{{ product.compare_at_price | money }}</div>        </div>
     </template>
@@ -36,16 +36,36 @@
         not available        </span>
     </template>
 </div></div></div><div class="product-header_form-block w-form">{% form 'product', product, class: 'product-header_default-state' %}
+<div li-for:inside="variant in product.variants">
+        {% for variant in product.variants %}                            
+                            <div class="product-header_subscription"><label class="product-header_subscription_radio-lable w-radio"><input type="radio" name="selling_plan_active" id="radio-5" data-name="selling_plan_active" x-on:click="sellingplan_active = false; selling_plan = ''" class="w-form-formradioinput w-radio-input" value="">
+<span class="w-form-label" for="radio-5">
+{{ section.settings.text_without_subscription }}
+</span>
+</label><div class="product-header_subscription_options"><label class="product-header_subscription_radio-lable is-on w-radio"><input type="radio" name="selling_plan_active" id="radio-4" data-name="selling_plan_active" x-on:click="sellingplan_active = true; selling_plan = '{{ variant.selling_plan_allocations.first.selling_plan.id }}'" class="w-form-formradioinput w-radio-input" value="Radio 4">
+<span class="w-form-label" for="radio-4">
+{{ section.settings.text_with_subscription }}
+</span>
+</label><div x-show="sellingplan_active" class="w-layout-vflex product-header_subscription_radio-lable is-on">{% for plan in variant.selling_plan_allocations %}    <label li-for="plan in variant.selling_plan_allocations" class="w-radio">
+                                    <input class="w-form-formradioinput w-radio-input" li-object:value="plan.selling_plan.id" name="selling_plan" data-name="selling_plan" x-model="selling_plan" type="radio" id="radio-4" value="{{ plan.selling_plan.id }}">
+
+                            <span li-object="plan.selling_plan.name" class="w-form-label" for="radio-4">{{ plan.selling_plan.name }}</span>
+                        </label>
+{% endfor %}</div></div></div>
+                            <input name="selling_plan" type="hidden" x-model="selling_plan">
+
+                            
+                    {% endfor %}    </div>
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
     <template x-for="(option, optionKey) in product.options" :key="optionKey">
     <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true"><div li-element="product-options-name" x-text="option">Variant</div><div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
     <label li-element="product-option-loop" class="product-header_radio w-radio"><div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button w-radio-input"></div><input type="radio" li-element="product-option-input" style="opacity:0;position:absolute;z-index:-1" x-on:click="setVariant" :name="option" :data-name="option" :value="variantName" :id="variantName.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')" :checked="selected_or_first_available_variant?.options.includes(variantName)" data-selectorType="radio" :class="firstOptionHasAvailableChildren[variantName] ? '' : 'data-disabled'">
-<span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio" x-text="variantName" :for="variantName">XS</span></label></template>
+<span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-4" x-text="variantName" :for="variantName">XS</span></label></template>
 </div></div></template>
     </div>
 {% endif %}<div class="product-header_add-to-cart-wrapper"><template x-if="selected_or_first_available_variant.available">
             <div li-js-if="selected_or_first_available_variant.available" class="product-header_buy-wrappper">
-        <input class="form_input is-quantity w-input" maxlength="256" name="quantity" li-element="add-to-cart-quantity" data-name="quantity" placeholder="1" type="number" id="quantity" required="" x-model="quantity">
+        <input class="form_input is-quantity w-input" maxlength="256" name="quantity-3" li-element="add-to-cart-quantity" data-name="Quantity 3" placeholder="1" type="number" id="quantity-3" required="" x-model="quantity">
 <a li-element="add-to-cart" href="#" class="button max-width-full w-button" @click="addToCart($event, true)" :disabled="!addToCartButton">Add to cart</a>        </div>
     </template>
 <template x-if="!selected_or_first_available_variant.available">
@@ -56,4 +76,4 @@
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
-<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[]}]} {% endschema %}
+<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero-Sub","class":"section_product-header","settings":[{"id":"text_without_subscription","type":"text","label":"without Subscription","default":"without Subscription"},{"id":"text_with_subscription","type":"text","label":"with Subscription","default":"with Subscription"},{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero-Sub","category":"Liquify","blocks":[]}]} {% endschema %}
