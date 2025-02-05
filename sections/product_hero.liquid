@@ -188,7 +188,7 @@
                                   
                                   name="selling_plan_active"
                                   data-name="selling_plan_active"
-                                  x-model="sellingplan_active"
+                                  x-on:click="sellingplan_active = false"
                                   type="radio"
                                   id="radio-5"
                                   value="false"
@@ -204,7 +204,8 @@
                                     name="selling_plan_active"
                                     id="radio-4"
                                     data-name="selling_plan_active"
-                                    x-model="sellingplan_active"
+                                    x-on:click="sellingplan_active = true"
+
                                     class="w-form-formradioinput w-radio-input"
                                     value="true"
                                   >
