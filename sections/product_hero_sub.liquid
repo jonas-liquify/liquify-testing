@@ -38,7 +38,7 @@
 </div></div></div><div class="product-header_form-block w-form">{% form 'product', product, class: 'product-header_default-state' %}
 <div li-for:inside="variant in product.variants">
         {% for variant in product.variants %}                            
-                            <div class="product-header_subscription"><label class="product-header_subscription_radio-lable w-radio"><input type="radio" name="selling_plan_active" id="radio-5" data-name="selling_plan_active" x-on:click="sellingplan_active = false; selling_plan = ''" class="w-form-formradioinput w-radio-input" value="">
+                            <template x-if="{{ variant.id }} === product.selected_or_first_available_variant.id"><div class="product-header_subscription"><label class="product-header_subscription_radio-lable w-radio"><input type="radio" name="selling_plan_active" id="radio-5" data-name="selling_plan_active" x-on:click="sellingplan_active = false; selling_plan = ''" class="w-form-formradioinput w-radio-input" value="">
 <span class="w-form-label" for="radio-5">
 {{ section.settings.text_without_subscription }}
 </span>
@@ -51,7 +51,7 @@
 
                             <span li-object="plan.selling_plan.name" class="w-form-label" for="radio-4">{{ plan.selling_plan.name }}</span>
                         </label>
-{% endfor %}</div></div></div>
+{% endfor %}</div></div></div></template>
                             <input name="selling_plan" type="hidden" x-model="selling_plan">
 
                             
