@@ -79,7 +79,7 @@
               x-text="LiquifyHelper.moneyFormat(price, true, '{{ shop.money_with_currency_format }}')"
             >
               $55
-            </div> <div x-text="product.selected_or_first_available_variant.selling_plan_allocations.find(allocation => allocation.selling_plan_id == selling_plan)?.price ?? LiquifyHelper.moneyFormat(price, true, '{{ shop.money_with_currency_format }}')"></div>
+            </div> <div x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.selling_plan_allocations.find(allocation => allocation.selling_plan_id == selling_plan)?.price ?? price, true, '{{ shop.money_with_currency_format }}')"></div>
             <template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
               <div li-js-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
                 <div
