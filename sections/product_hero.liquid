@@ -205,7 +205,7 @@
                                     name="selling_plan_active"
                                     id="radio-4"
                                     data-name="selling_plan_active"
-                                    x-on:click="sellingplan_active = true; selling_plan = ''"
+                                    x-on:click="sellingplan_active = true; selling_plan = '{{ variant.selected_selling_plan_allocation.selling_plan.id }}'"
 
                                     class="w-form-formradioinput w-radio-input"
                                     value="true"
