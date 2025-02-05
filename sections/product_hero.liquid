@@ -186,12 +186,13 @@
                                 ><input
                                   class="w-form-formradioinput w-radio-input"
                                   
-                                  name="selling_plan_active"
+                                  name="sellingplan_active"
                                   data-name="selling_plan_active"
                                   x-model="selling_plan"
                                   type="radio"
                                   id="radio-5"
                                   value=""
+                                   
                                 >
                                 <span class="w-form-label" for="radio-5">Ohne Subscription</span></label
                               >
@@ -231,7 +232,7 @@
                             </div>
                           </template>
                         {% endfor %}
-                        <input name="selling_plan" type="hidden" x-model="selling_plan">
+                        <template x-if="selling_plan_active"><input name="selling_plan" type="hidden" x-model="selling_plan"></template>
 
                         <div>
                           {{ block.settings.text_text }}
