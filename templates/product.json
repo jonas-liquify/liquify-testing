@@ -15,12 +15,19 @@
         "text_2_g4EUyY": {
           "type": "text-2",
           "settings": {
-            "text_text": "<div class=\"subscriptions_app_embed_block\"></div>"
+            "html_text": "This is some text inside of a div block."
+          }
+        },
+        "subscription_9imQYM": {
+          "type": "subscription",
+          "settings": {
+            "text_text": "This is some text inside of a div block."
           }
         }
       },
       "block_order": [
-        "text_2_g4EUyY"
+        "text_2_g4EUyY",
+        "subscription_9imQYM"
       ],
       "settings": {
         "text_headline": "Description"
