@@ -25,13 +25,13 @@
         "collection_MR9TKg": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "test"
           }
         },
         "collection_NCPYXh": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "test-2"
           }
         }
       },
