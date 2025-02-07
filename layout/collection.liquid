@@ -123,36 +123,56 @@
         Shopify.queryParams.sort_by = value;
         location.search = new URLSearchParams(Shopify.queryParams).toString();
       });
-    </script><script>document.addEventListener('DOMContentLoaded', function() {
-                // Alle Collection-Links ausw&auml;hlen
-                const collectionLinks = document.querySelectorAll('.collection_tab-item.is-link');
-                collectionLinks.forEach(link => {
-                  link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Verhindert den normalen Seitenwechsel
-                    // Den Ziel-Link (z.B. "/collections/sale") ermitteln
-                    const collectionUrl = this.getAttribute('href');
-                    // Die Section-ID aus dem data-Attribut holen (z.B. "featured-collection")
-                    const sectionId = this.dataset.sectionId;
-                    // Ajax-Request an die Section Rendering API
-                    // Wir h&auml;ngen "?sections=sectionId" an die URL, damit wir nur diese Section zur&uuml;ckbekommen
-                    const fetchUrl = `${collectionUrl}?sections=${sectionId}`;
-                    fetch(fetchUrl)
-                      .then(response => response.json())
-                      .then(data => {
-                        // data[sectionId] enth&auml;lt das HTML der gerenderten Section
-                        const newSectionHtml = data[sectionId];
-                        // Jetzt im DOM das alte HTML durch das neue ersetzen
-                        const sectionContainer = document.getElementById('shopify-section-' + sectionId);
-                        if (sectionContainer) {
-                          sectionContainer.innerHTML = newSectionHtml;
-                        }
-                      })
-                      .catch(error => {
-                        console.error('Fehler beim Laden der Section:', error);
-                      });
-                  });
-                });
-              });
-            </script>
+    </script><script>
+  // 1. Diese Funktion setzt Event-Listener für alle .collection-link
+  function initCollectionLinks() {
+    // Zuerst: alle vorhandenen collection-links holen
+    const collectionLinks = document.querySelectorAll('.collection-link.is-link');
+
+    // Auf jeden Link einen Click-Listener setzen
+    collectionLinks.forEach(link => {
+      // Tipp: Vorher alte Listener entfernen, falls nötig
+      // -> Nicht immer erforderlich, weil du meist komplett neue DOM-Elemente einfügst.
+      
+      link.addEventListener('click', handleCollectionLinkClick);
+    });
+  }
+
+  // 2. Die Funktion, die beim Klick auf .collection-link ausgeführt wird
+  function handleCollectionLinkClick(event) {
+    event.preventDefault();
+    
+    // Die URL ermitteln, z. B. /collections/sale
+    const collectionUrl = this.getAttribute('href');
+    // Section-ID, z. B. featured-collection
+    const sectionId = this.dataset.sectionId;
+
+    // Nun den Ajax-Fetch bauen
+    const fetchUrl = `${collectionUrl}?sections=${sectionId}`;
+    
+    fetch(fetchUrl)
+      .then(response => response.json())
+      .then(data => {
+        // JSON-Antwort -> HTML-String der Section
+        const newSectionHtml = data[sectionId];
+        
+        // Den Container finden und altes HTML ersetzen
+        const sectionContainer = document.getElementById('shopify-section-' + sectionId);
+        sectionContainer.innerHTML = newSectionHtml;
+
+        // 3. Jetzt erneut initCollectionLinks aufrufen,
+        //    damit neue Links (oder andere Elemente) wieder geklickt werden können
+        initCollectionLinks();
+      })
+      .catch(error => {
+        console.error('Fehler beim Laden der Section:', error);
+      });
+  }
+
+  // 4. Beim ersten Laden der Seite einmal initialisieren
+  document.addEventListener('DOMContentLoaded', () => {
+    initCollectionLinks();
+  });
+</script>
 </body>
 </html>
