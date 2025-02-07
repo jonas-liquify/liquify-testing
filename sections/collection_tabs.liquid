@@ -2,7 +2,7 @@
     {% if block.type == "collection" %}
                     <div li-block="Collection" class="collection_block">
                                     
-                                    <a data-section-id="{{ section.id }}" li-object:href="block.settings.collection.url" href="{{ block.settings.collection.url }}" class="collection_tab-item is-link w-inline-block"><div li-object="block.settings.collection.title">{{ block.settings.collection.title }}</div></a>
+                                    <a data-section-id="shopify-section-{{ section.id }}" li-object:href="block.settings.collection.url" href="{{ block.settings.collection.url }}" class="collection_tab-item is-link w-inline-block"><div li-object="block.settings.collection.title">{{ block.settings.collection.title }}</div></a>
                                     
                                     <div class="li-custom w-embed"></div>
 
