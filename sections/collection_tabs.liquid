@@ -93,7 +93,7 @@
                         // data[sectionId] enth&auml;lt das HTML der gerenderten Section
                         const newSectionHtml = data[sectionId];
                         // Jetzt im DOM das alte HTML durch das neue ersetzen
-                        const sectionContainer = document.getElementById(sectionId);
+                        const sectionContainer = document.getElementById('shopify-section-' + sectionId);
                         if (sectionContainer) {
                           sectionContainer.innerHTML = newSectionHtml;
                         }
