@@ -21,10 +21,24 @@
           "settings": {
             "collection": "frontpage"
           }
+        },
+        "collection_MR9TKg": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_NCPYXh": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
         }
       },
       "block_order": [
-        "collection_qRdXzN"
+        "collection_qRdXzN",
+        "collection_MR9TKg",
+        "collection_NCPYXh"
       ],
       "settings": {}
     }
