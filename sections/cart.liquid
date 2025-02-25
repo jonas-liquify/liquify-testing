@@ -11,8 +11,8 @@
                             <div id="w-node-_51dd9338-e259-f546-1410-ab7878c921c7-41b25841" class="cart_table-item anzahl"><div class="cart_quantity-wrapper"><div>Quantity</div><input class="cart_quantity w-input" li-object:value="item.quantity" maxlength="256" name="updates[]" data-name="updates[]" placeholder="1" type="number" id="updates[]" required="" value="{{ item.quantity }}">
 </div><a href="{{ item.url_to_remove }}" li-object:href="item.url_to_remove" class="text-size-tiny text-style-link text-align-center w-inline-block"><div>Remove</div></a></div>
                             
-                            <div id="w-node-_3d7cbf18-159c-e09d-034b-aa8947f77c7f-41b25841" class="cart_price-info"><div li-object="item.final_line_price | money" id="w-node-_51dd9338-e259-f546-1410-ab7878c921d0-41b25841" class="text-size-regular">{{ item.final_line_price | money }}</div>{% if item.original_line_price > item.final_line_price %}    <div li-if="item.original_line_price > item.final_line_price" id="w-node-_3f61db21-129c-484c-c7db-5af0a16cea45-41b25841">
-    <div li-object="item.original_line_price | money" id="w-node-_71195821-f29a-eb19-64c4-f0623c97c5cd-41b25841" class="text-size-regular text-style-strikethrough">{{ item.original_line_price | money }}</div>    </div>
+                            <div id="w-node-_3d7cbf18-159c-e09d-034b-aa8947f77c7f-41b25841" class="cart_price-info"><div li-object="item.final_line_price | money" class="text-size-regular">{{ item.final_line_price | money }}</div>{% if item.original_line_price > item.final_line_price %}    <div li-if="item.original_line_price > item.final_line_price">
+    <div li-object="item.original_line_price | money" class="text-size-regular text-style-strikethrough">{{ item.original_line_price | money }}</div>    </div>
 {% endif %}</div>
                             
                         </div>
