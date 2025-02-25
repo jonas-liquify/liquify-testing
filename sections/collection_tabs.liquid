@@ -11,7 +11,7 @@
             {% endif %}
 {% endfor %}
 </div>{% paginate collection.products by 50 %}
-    <div li-paginate:by="50" li-paginate="collection.products" class="filter_layout" by="50"><div id="w-node-_678e0483-bbe4-e79a-1722-b169c587feae-c587feae" class="filter_filters-wrapper"><form action="{{ routes.search_url }}" method="get" role="search" class="filter_form_component"><div id="w-node-_265c4342-3d21-e8bf-dfee-efec035c3507-c587feae" class="filter_form"><div id="w-node-_678e0483-bbe4-e79a-1722-b169c587feb1-c587feae" class="filter_form-header"><div class="filter_heading">Filters</div><a li-object:href="collection.url" href="{{ collection.url }}" class="button is-link hide-tablet w-inline-block"><div>Clear all</div></a></div><div class="filter_results-wrapper"><div class="filter_results-text">Showing <span li-object="collection.all_products_count | append: ' '">{{ collection.all_products_count | append: ' ' }}</span>Products<span fs-cmsfilter-element="items-count"></span></div></div><div class="filter_form-field-wrapper"><input name="type" type="hidden" class="form_input" value="product">
+    <div li-paginate:by="50" li-paginate="collection.products" class="filter_layout" by="50"><div id="w-node-_678e0483-bbe4-e79a-1722-b169c587feae-c587feae" class="filter_filters-wrapper"><form action="{{ routes.search_url }}" method="get" role="search" class="filter_form_component"><div id="w-node-_265c4342-3d21-e8bf-dfee-efec035c3507-c587feae" class="filter_form"><div class="filter_form-header"><div class="filter_heading">Filters</div><a li-object:href="collection.url" href="{{ collection.url }}" class="button is-link hide-tablet w-inline-block"><div>Clear all</div></a></div><div class="filter_results-wrapper"><div class="filter_results-text">Showing <span li-object="collection.all_products_count | append: ' '">{{ collection.all_products_count | append: ' ' }}</span>Products<span fs-cmsfilter-element="items-count"></span></div></div><div class="filter_form-field-wrapper"><input name="type" type="hidden" class="form_input" value="product">
 <label for="filter-search" class="form_hidden-label">Search for Products</label><input name="q" placeholder="Search" type="search" id="filter-search" class="form_input" value="{{ search.terms | escape }}">
 </div><div class="filter_scroll-wrapper"><div class="filter_filter-group-list">{% for filter in collection.filters %}    <div li-for="filter in collection.filters" class="filter_filter-group">
                                     
@@ -74,4 +74,44 @@
     <a li-object:href="paginate.next.url" href="{{ paginate.next.url }}" class="button is-secondary is-icon w-inline-block"><div>Next</div><div class="pagination_arrow is-right w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 8" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img"><path d="M1.67318 0.589844L6.26318 5.16984L10.8532 0.589844L12.2632 1.99984L6.26318 7.99984L0.263184 1.99984L1.67318 0.589844Z" fill="currentColor"></path></svg></div></a>    </li>
 {% endif %}</ul>    </nav>
 {% endif %}</div></div>{% endpaginate %}
-</div></div><div class="hide w-embed w-script"></div> {% schema %} {"tag":"section","name":"collection_tabs","class":"section_filters","blocks":[{"name":"Collection","type":"collection","settings":[{"type":"collection","id":"collection","label":"Collection"}]}],"presets":[{"name":"collection_tabs","category":"Liquify","blocks":[{"type":"collection"}]}]} {% endschema %}
+</div></div><div class="hide w-embed w-script"><script>// 1. This function sets event listeners for all .collection_tab-item.is-link
+              function initCollectionLinks() {
+                // First: get all existing .collection_tab-item.is-link elements
+                const collectionLinks = document.querySelectorAll('.collection_tab-item.is-link');
+                // Add a click event listener to each link
+                collectionLinks.forEach(link => {
+                  // Tip: Remove old listeners first if necessary
+                  // -> Not always required because you're usually replacing the entire DOM element
+                  link.addEventListener('click', handleCollectionLinkClick);
+                });
+              }
+              // 2. The function that is executed when a .collection_tab-item.is-link is clicked
+              function handleCollectionLinkClick(event) {
+                event.preventDefault();
+                // Determine the URL, e.g., /collections/sale
+                const collectionUrl = this.getAttribute('href');
+                // Section ID, e.g., featured-collection
+                const sectionId = this.dataset.sectionId;
+                // Now build the Ajax fetch request
+                const fetchUrl = `${collectionUrl}?sections=${sectionId}`;
+                fetch(fetchUrl)
+                  .then(response => response.json())
+                  .then(data => {
+                    // JSON response -> the section's HTML string
+                    const newSectionHtml = data[sectionId];
+                    // Find the container and replace the old HTML
+                    const sectionContainer = document.getElementById('shopify-section-' + sectionId);
+                    sectionContainer.innerHTML = newSectionHtml;
+                    // 3. Call initCollectionLinks again so that new links (or other elements) 
+                    //    can be clicked again
+                    initCollectionLinks();
+                  })
+                  .catch(error => {
+                    console.error('Error while loading the section:', error);
+                  });
+              }
+              // 4. Initialize once on the first page load
+              document.addEventListener('DOMContentLoaded', () => {
+                initCollectionLinks();
+              });
+            </script></div> {% schema %} {"tag":"section","name":"collection_tabs","class":"section_filters","blocks":[{"name":"Collection","type":"collection","settings":[{"type":"collection","id":"collection","label":"Collection"}]}],"presets":[{"name":"collection_tabs","category":"Liquify","blocks":[{"type":"collection"}]}]} {% endschema %}
