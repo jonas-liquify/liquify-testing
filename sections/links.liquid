@@ -5,7 +5,7 @@
     {% if block.type == "block" %}
                     <div li-block="Block" role="listitem" class="mehr_item w-dyn-item">
                                     
-                                    <a href="{{ block.settings.url_link }}" class="mehr_image-link w-inline-block"> <div class="mehr_image-wrapper"><h3 class="heading-style-h3 z-index-1 text-color-white">{{ block.settings.text_titel }}</h3>{% if block.settings.image_bild %}<img alt="{{ block.settings.image_bild.alt }}" loading="lazy" src="{{ block.settings.image_bild | img_url: 'master' }}" class="mehr_image">{% else %} {{ 'detailed-apparel-1' | placeholder_svg_tag: 'mehr_image' }} {% endif %}<div class="mehr_overlay"></div></div> </a>
+                                    <a href="{{ block.settings.url_link }}" class="mehr_image-link w-inline-block"> <div class="mehr_image-wrapper"><h3 class="heading-style-h3 z-index-1 text-color-white">{{ block.settings.text_titel }}</h3>{% if block.settings.image_bild %}<img alt="{{ block.settings.image_bild.alt }}" loading="lazy" src="{{ block.settings.image_bild | img_url: 'small' }}" class="mehr_image">{% else %} {{ 'detailed-apparel-1' | placeholder_svg_tag: 'mehr_image' }} {% endif %}<div class="mehr_overlay"></div></div> </a>
 
                                     
                             </div>
