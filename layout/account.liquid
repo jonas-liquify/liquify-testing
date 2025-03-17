@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-wf-page="67977c7d10cee70041b2583b" data-wf-site="67977c7d10cee70041b257de" lang="{{ request.locale.iso_code }}"><head><meta charset="utf-8">
+<html data-wf-page="65cfcaa9ba2a4e1b73cf87e7" data-wf-site="65cfcaa9ba2a4e1b73cf87c0" lang="{{ request.locale.iso_code }}"><head><meta charset="utf-8">
 <title>{{ page_title }}</title><meta content="{{ page_description }}" name="description">
 <meta content="{{ page_title }}" property="og:title">
 <meta content="{{ page_description }}" property="og:description">
@@ -11,7 +11,7 @@
 <meta content="Webflow" name="generator">
 <link href="{{ 'normalize.css' | asset_url }}" rel="stylesheet" type="text/css">
 <link href="{{ 'webflow.css' | asset_url }}" rel="stylesheet" type="text/css">
-<link href="{{ 'liquify-testing-template.webflow.css' | asset_url }}" rel="stylesheet" type="text/css">
+<link href="{{ 'liquify-1-0.webflow.css' | asset_url }}" rel="stylesheet" type="text/css">
 <script type="text/javascript">! function(o, c) {
         var n = c.documentElement,
           t = " w-mod-";
@@ -51,45 +51,13 @@
       }
     </style><meta name="theme-color" content="#000" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#fff" media="(prefers-color-scheme: dark)">
-   
-{% if page.metafields.custom.index == false or request.page_type == 'collection' %}
-<meta name="robots" content="noindex">
-{% endif %}
-{% if request.page_type == "page" %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "AQON Pure",
-  "url": "https://www.aqon-pure.com",
-  "logo": "https://cdn.shopify.com/s/files/1/0840/0581/4600/files/logo-aqon-pure__8_1.webp?v=1730709782",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Im Erpel 6",
-    "addressLocality": "Alsbach-H&auml;hnlein",
-    "postalCode": "64665",
-    "addressCountry": "DE"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+49(0) 62 51 / 59 308 - 0",
-    "contactType": "customer service"
-  },
-    "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ settings.reviews }}",
-    "reviewCount": "{{ settings.reviews_count }}"
-  }
-}
-</script>
-{% endif %}
 <script src="{{ '_helper.js' | asset_url }}" type="text/javascript"></script>{{ content_for_header }}</head>
 <body li-page="account">
 
 <div class="page-wrapper">{% render 'global_styles' %}
 {% section 'header' %}
  {{ content_for_layout }} {% section 'footer' %}
-</div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67977c7d10cee70041b257de" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="{{ 'webflow.js' | asset_url }}" type="text/javascript"></script>{% render 'search_javascript' %}
+</div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65cfcaa9ba2a4e1b73cf87c0" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="{{ 'webflow.js' | asset_url }}" type="text/javascript"></script>{% render 'search_javascript' %}
 
 </body>
 </html>
