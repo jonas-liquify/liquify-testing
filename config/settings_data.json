@@ -1,0 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "text_newsletter_headline": "Signup for Newsletter",
+          "text_checkbox": "By subscribing you agree to with our <a href=\"#\"><span class=\"text-color-white text-style-link\">Privacy Policy</span></a> and provide consent to receive updates from our company."
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "collection_search_bestseller": "",
+          "collection_search_bestseller_limit": 6
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "1768834845299682660": {
+        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+        "disabled": true,
+        "settings": {
+          "color_text_title": "#6d7175",
+          "color_text_body": "#6d7175",
+          "dividers_color": "#8f8d8d",
+          "bacgkround_color": "#ffffff",
+          "border_thickness": 1,
+          "border_radius": 0,
+          "supporting_text_title": "Purchase options",
+          "subscription_policy_url": ""
+        }
+      }
+    }
+  }
+}
