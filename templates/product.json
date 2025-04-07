@@ -9,8 +9,8 @@
  */
 {
   "sections": {
-    "product_hero_kevin_pQ6c8r": {
-      "type": "product_hero_kevin",
+    "product_hero_8nieRM": {
+      "type": "product_hero",
       "settings": {
         "text_headline": "Description"
       }
@@ -25,7 +25,7 @@
   "layout": "product",
   "wrapper": "main.main-wrapper",
   "order": [
-    "product_hero_kevin_pQ6c8r",
+    "product_hero_8nieRM",
     "product_recommended"
   ]
 }
