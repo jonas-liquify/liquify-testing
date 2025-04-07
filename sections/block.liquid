@@ -3,10 +3,10 @@
 </h2>
 </div><div class="blog_component"><div class="blog_featured-item"><div li-content-for-blocks="">
 {% for block in section.blocks %}
-{% case block.type %}
-{% when '@app' %}
-{% render block %}
-{% when 'option-1' %}
+    {% case block.type %}
+        {% when '@app' %}
+            {% render block %}
+    {% when 'option-1' %}
             <div li-block="Option 1" class="option_item">
                     
                     <div>
@@ -33,8 +33,9 @@
 
                     
                 </div>
-    {% endcase %}
+        {% endcase %}
 {% endfor %}
 
-    </div>
-</div></div></div></div> {% schema %} {"tag":"section","name":"Block","class":"section_blog","blocks":[{"name":"Option 1","type":"option-1","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 1"}]},{"name":"Option 2","type":"option-2","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 2"}]},{"name":"Option 3","type":"option-3","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 3"}]},{"type":"@app"}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"li-content-for-blocks"}],"presets":[{"name":"Block","category":"Liquify","blocks":[{"type":"option-1"},{"type":"option-2"},{"type":"option-3"}]}]} {% endschema %}
+</div>
+
+</div></div></div></div> {% schema %} {"tag":"section","name":"Block","class":"section_blog","blocks":[{"name":"Option 1","type":"option-1","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 1"}]},{"name":"Option 2","type":"option-2","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 2"}]},{"name":"Option 3","type":"option-3","settings":[{"id":"text_text","type":"text","label":"Text","default":"Option 3"}]}],"settings":[{"id":"text_headline","type":"text","label":"Headline","default":"li-content-for-blocks"}],"presets":[{"name":"Block","category":"Liquify","blocks":[{"type":"option-1"},{"type":"option-2"},{"type":"option-3"}]}]} {% endschema %}
