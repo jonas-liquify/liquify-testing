@@ -9,14 +9,14 @@
  */
 {
   "sections": {
-    "product_hero_8nieRM": {
-      "type": "product_hero",
+    "r_product_hero_form_3LPyFe": {
+      "type": "r_product_hero_form",
       "settings": {
         "text_headline": "Description"
       }
     },
-    "product_recommended": {
-      "type": "product_recommended",
+    "r_product_recommende_NQR8pE": {
+      "type": "r_product_recommende",
       "settings": {
         "text_headline": "Recommended"
       }
@@ -25,7 +25,7 @@
   "layout": "product",
   "wrapper": "main.main-wrapper",
   "order": [
-    "product_hero_8nieRM",
-    "product_recommended"
+    "r_product_hero_form_3LPyFe",
+    "r_product_recommende_NQR8pE"
   ]
 }
