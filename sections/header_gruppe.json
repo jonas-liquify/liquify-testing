@@ -17,17 +17,9 @@
         "collection_search_bestseller": "",
         "collection_search_bestseller_limit": 6
       }
-    },
-    "404_4FLejB": {
-      "type": "404",
-      "settings": {
-        "text_heading": "Page Not Found",
-        "text_text": "The page you are looking for doesn't exist or has been moved"
-      }
     }
   },
   "order": [
-    "header",
-    "404_4FLejB"
+    "header"
   ]
 }
