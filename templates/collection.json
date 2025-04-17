@@ -13,14 +13,6 @@
       "type": "collection_hero",
       "settings": {}
     },
-    "collection_products": {
-      "type": "collection_products",
-      "settings": {}
-    },
-    "collection_tabs": {
-      "type": "collection_tabs",
-      "settings": {}
-    },
     "r_collection_product_3A6mkV": {
       "type": "r_collection_product",
       "name": "R-collection_product",
@@ -31,8 +23,6 @@
   "wrapper": "main.main-wrapper",
   "order": [
     "collection_hero",
-    "collection_products",
-    "collection_tabs",
     "r_collection_product_3A6mkV"
   ]
 }
