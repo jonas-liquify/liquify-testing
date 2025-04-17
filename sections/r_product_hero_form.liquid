@@ -39,7 +39,7 @@
                             
                             {% if option.name == 'Color' %}    <div li-if="option.name == 'Color'">
     <div li-object="option.name | escape">{{ option.name | escape }}</div>{% for value in option.values %}    <div li-for="value in option.values" class="product-header_radio-list">
-                                    <label class="product-header_radio is-color w-radio" style="background-color: {{ value.swatch.color }}"><div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button w-radio-input"></div><input li-render-custom-trigger="input" name="Radio" data-name="Radio 8" type="radio" id="radio-8" li-render-custom-value="{{ product.url }}?section_id={{ section.id }}&variant={{ value.variant.id }}" style="opacity:0;position:absolute;z-index:-1" value="Radio">
+                                    <label class="product-header_radio is-color w-radio" style="background-color: {{ value.swatch.color.rgb }}"><div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button w-radio-input"></div><input li-render-custom-trigger="input" name="Radio" data-name="Radio 8" type="radio" id="radio-8" li-render-custom-value="{{ product.url }}?section_id={{ section.id }}&variant={{ value.variant.id }}" style="opacity:0;position:absolute;z-index:-1" value="Radio">
 <span li-object="value" class="text-size-regular text-weight-semibold hide w-form-label" for="radio-8">{{ value }}</span></label>
                         </div>
 {% endfor %}    </div>
