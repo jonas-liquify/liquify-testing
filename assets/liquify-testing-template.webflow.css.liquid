@@ -2665,9 +2665,9 @@ figcaption {
   grid-row-gap: .5rem;
   align-items: center;
   margin-bottom: 0;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  padding-left: 1.25rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-left: 0;
   display: flex;
 }
 
@@ -3786,6 +3786,44 @@ figcaption {
 
 .li-custom {
   display: none;
+}
+
+.filter_price-range {
+  grid-column-gap: .75rem;
+  grid-row-gap: .75rem;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.filter_input-wrapper {
+  position: relative;
+}
+
+.filter_input {
+  border: 1px solid var(--base-color-neutral--black);
+  border-radius: var(--border-radius--small);
+  color: #000;
+  letter-spacing: .04063rem;
+  text-transform: uppercase;
+  width: 4.875rem;
+  height: 2rem;
+  padding: .375rem .5rem .375rem 1.25rem;
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+.filter_input-currency {
+  letter-spacing: .04063rem;
+  text-transform: uppercase;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: .8125rem;
+  font-weight: 700;
+  display: flex;
+  position: absolute;
+  inset: 52% auto auto .5rem;
+  transform: translate(0, -50%);
 }
 
 @media screen and (max-width: 991px) {
