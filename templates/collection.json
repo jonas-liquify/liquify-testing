@@ -19,7 +19,7 @@
       "settings": {}
     }
   },
-  "layout": "collection",
+  "layout": "theme",
   "wrapper": "main.main-wrapper",
   "order": [
     "collection_hero",
