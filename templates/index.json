@@ -26,7 +26,7 @@
     "category": {
       "type": "category",
       "settings": {
-        "text_headline": "Short heading here",
+        "text_headline": "Short heading here dfgfddfg",
         "url_button_link": "",
         "text_button_text": "All products",
         "collection_collection": "",
@@ -131,7 +131,7 @@
       "type": "custom",
       "settings": {
         "text_headline": "li-settings:custom",
-        "vertical_alignment": "middle",
+        "vertical_alignment2": "middle",
         "text_button_text": "Learn More"
       }
     },
@@ -142,159 +142,7 @@
           "type": "option-1",
           "settings": {
             "text_text": "Option 1"
-          },
-          "blocks": {
-            "option_3_j4N6hY": {
-              "type": "option-3",
-              "settings": {
-                "text_text": "Option 3"
-              }
-            },
-            "option_1_pW3pAf": {
-              "type": "option-1",
-              "settings": {
-                "text_text": "Option 1"
-              },
-              "blocks": {
-                "option_1_QhENzq": {
-                  "type": "option-1",
-                  "settings": {
-                    "text_text": "Option 1"
-                  },
-                  "blocks": {
-                    "option_2_4nKBLX": {
-                      "type": "option-2",
-                      "settings": {
-                        "text_text": "Option 2"
-                      }
-                    },
-                    "option_1_fcCQf4": {
-                      "type": "option-1",
-                      "settings": {
-                        "text_text": "Option 1"
-                      },
-                      "blocks": {
-                        "option_1_T9Q3zq": {
-                          "type": "option-1",
-                          "settings": {
-                            "text_text": "Option 1"
-                          },
-                          "blocks": {
-                            "option_1_xifFga": {
-                              "type": "option-1",
-                              "settings": {
-                                "text_text": "Option 1"
-                              },
-                              "blocks": {
-                                "option_1_4FPXQn": {
-                                  "type": "option-1",
-                                  "settings": {
-                                    "text_text": "Option 1"
-                                  },
-                                  "blocks": {
-                                    "option_1_HBqFVA": {
-                                      "type": "option-1",
-                                      "settings": {
-                                        "text_text": "Option 1"
-                                      }
-                                    }
-                                  },
-                                  "block_order": [
-                                    "option_1_HBqFVA"
-                                  ]
-                                }
-                              },
-                              "block_order": [
-                                "option_1_4FPXQn"
-                              ]
-                            }
-                          },
-                          "block_order": [
-                            "option_1_xifFga"
-                          ]
-                        },
-                        "option_3_QEtfgW": {
-                          "type": "option-3",
-                          "settings": {
-                            "text_text": "Option 3"
-                          }
-                        },
-                        "option_1_GqYUxT": {
-                          "type": "option-1",
-                          "settings": {
-                            "text_text": "Option 1"
-                          },
-                          "blocks": {
-                            "option_1_tNLVPQ": {
-                              "type": "option-1",
-                              "settings": {
-                                "text_text": "Option 1"
-                              },
-                              "blocks": {
-                                "option_1_Ddt7hc": {
-                                  "type": "option-1",
-                                  "settings": {
-                                    "text_text": "Option 1"
-                                  },
-                                  "blocks": {
-                                    "option_1_9UUr8T": {
-                                      "type": "option-1",
-                                      "settings": {
-                                        "text_text": "Option 1"
-                                      }
-                                    }
-                                  },
-                                  "block_order": [
-                                    "option_1_9UUr8T"
-                                  ]
-                                }
-                              },
-                              "block_order": [
-                                "option_1_Ddt7hc"
-                              ]
-                            }
-                          },
-                          "block_order": [
-                            "option_1_tNLVPQ"
-                          ]
-                        },
-                        "option_1_RXyi6m": {
-                          "type": "option-1",
-                          "settings": {
-                            "text_text": "Option 1"
-                          }
-                        }
-                      },
-                      "block_order": [
-                        "option_1_T9Q3zq",
-                        "option_3_QEtfgW",
-                        "option_1_GqYUxT",
-                        "option_1_RXyi6m"
-                      ]
-                    }
-                  },
-                  "block_order": [
-                    "option_2_4nKBLX",
-                    "option_1_fcCQf4"
-                  ]
-                }
-              },
-              "block_order": [
-                "option_1_QhENzq"
-              ]
-            },
-            "option_2_PaQ9gJ": {
-              "type": "option-2",
-              "settings": {
-                "text_text": "Option 2"
-              }
-            }
-          },
-          "block_order": [
-            "option_3_j4N6hY",
-            "option_1_pW3pAf",
-            "option_2_PaQ9gJ"
-          ]
+          }
         }
       },
       "block_order": [
