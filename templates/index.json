@@ -42,7 +42,7 @@
     "content": {
       "type": "content",
       "settings": {
-        "text_headline": "Short heading here",
+        "text_headline": "Short heading here test",
         "text_button_text": "All Articles",
         "url_button_link": "",
         "url_artikel_1_link": "",
