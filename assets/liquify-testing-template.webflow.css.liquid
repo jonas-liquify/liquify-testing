@@ -26,13 +26,13 @@
   --background-color--background-alternate: var(--base-color-neutral--white);
   --background-color--background-success: var(--base-color-system--success-green);
   --text-color--text-success: var(--base-color-system--success-green-dark);
+  --base-color-neutral--neutral-light: #aaa;
   --base-color-brand--blue-light: #d9e5ff;
   --base-color-brand--blue: #2d62ff;
   --base-color-brand--blue-dark: #080331;
   --base-color-brand--pink-light: #ffaefe;
   --base-color-brand--pink: #dd23bb;
   --base-color-brand--pink-dark: #3c043b;
-  --base-color-neutral--neutral-light: #aaa;
   --base-color-neutral--neutral-dark: #444;
   --base-color-neutral--neutral-darkest: #111;
   --base-color-system--success-green: #cef5ca;
@@ -3826,6 +3826,22 @@ figcaption {
   transform: translate(0, -50%);
 }
 
+.product-header_radio-wrapper {
+  border: 1px solid var(--base-color-neutral--neutral-light);
+  border-radius: var(--border-radius--medium);
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0;
+  padding: .3rem .7rem;
+  display: flex;
+}
+
+.product-header_radio-style {
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: .5rem;
+}
+
 @media screen and (max-width: 991px) {
   .padding-medium {
     padding: 1.5rem;
@@ -5504,6 +5520,7 @@ figcaption {
 }
 
 #w-node-_8d3ee470-1387-44a0-0f96-dbacf900d9b8-41b2584e {
+  grid-area: span 1 / span 1 / span 1 / span 1;
   align-self: center;
 }
 
