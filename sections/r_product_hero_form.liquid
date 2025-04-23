@@ -30,7 +30,7 @@
                             <div class="product-header_radio-list">{% for value in option.values %}    <label li-for="value in option.values" class="product-header_radio-wrapper w-radio">
                                     <input li-render-custom-trigger="input" class="w-form-formradioinput product-header_radio-style w-radio-input" name="{{ option.name }}" data-name="Radio 3" type="radio" id="radio-3" li-render-custom-value="{{ product.url }}?section_id={{ section.id }}&variant={{ value.variant.id }}" value="Radio" {% if value.selected %}checked{% endif %}>
 
-                            <span li-object="value" class="text-size-regular text-weight-semibold w-form-label" for="radio-3">{{ value }}</span>
+                            <span class="text-size-regular text-weight-semibold w-form-label" for="radio-3" style="{% unless value.available %} text-decoration: line-through {% endunless %}"><span li-object="value">{{ value }}</span></span>
                         </label>
 {% endfor %}</div>
                             
