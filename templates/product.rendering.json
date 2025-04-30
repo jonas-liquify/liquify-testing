@@ -9,8 +9,9 @@
  */
 {
   "sections": {
-    "r_product_hero_form_3LPyFe": {
-      "type": "r_product_hero_form",
+    "product_hero_dTmQ3c": {
+      "type": "product_hero",
+      "name": "Product-Hero",
       "settings": {
         "text_headline": "Description"
       }
@@ -25,7 +26,7 @@
   "layout": "product",
   "wrapper": "main.main-wrapper",
   "order": [
-    "r_product_hero_form_3LPyFe",
+    "product_hero_dTmQ3c",
     "r_product_recommende_NQR8pE"
   ]
 }
