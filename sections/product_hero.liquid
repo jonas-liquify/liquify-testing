@@ -45,10 +45,8 @@
 <span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-6" x-text="variantName" :for="variantName">XS</span></label></template>
 </div>        </div>
     </template>
-</div></template>
-<template x-for="(option, optionKey) in product.options" :key="optionKey">
-    <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true"><template x-if="option == 'Size'">
-            <div li-js-if="option == 'Size'">
+<template x-if="option == 'Size'">
+            <div id="selector" li-js-if="option == 'Size'">
         <div li-element="product-options-name" x-text="option">Variant</div><div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
     <label li-element="product-option-loop" class="product-header_radio w-radio"><div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button w-radio-input"></div><input type="radio" li-element="product-option-input" style="opacity:0;position:absolute;z-index:-1" x-on:click="setVariant" :name="option" :data-name="option" :value="variantName" :id="variantName.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')" :checked="selected_or_first_available_variant?.options.includes(variantName)" data-selectorType="radio" :class="firstOptionHasAvailableChildren[variantName] ? '' : 'data-disabled'">
 <span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-7" x-text="variantName" :for="variantName">XS</span></label></template>
@@ -69,4 +67,7 @@
 <div class="hide w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="hide w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="product-header_description"><h2 class="heading-style-h3">
 {{ section.settings.text_headline }}
 </h2>
-<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div></div></div></div></div></div></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[]}]} {% endschema %}
+<div li-object="product.description" class="text-rich-text max-width-large w-richtext">{{ product.description }}</div><div id="target"></div></div></div></div></div></div></div><div class="hide w-embed w-script"><script>const element = document.getElementById("selector");
+              const targetDiv = document.getElementById("target");
+              targetDiv.appendChild(element);
+            </script></div> {% schema %} {"tag":"section","name":"Product-Hero","class":"section_product-header","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Description"}],"presets":[{"name":"Product-Hero","category":"Liquify","blocks":[]}]} {% endschema %}
